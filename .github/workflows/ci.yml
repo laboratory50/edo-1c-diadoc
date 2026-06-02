@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: self-hosted
+    env:
+      DOCKER_HOST: tcp://docker1.lab50:2375
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t 1cedo .
+
+      - name: Run tests
+        run: docker run --rm 1cedo python3 manage.py test
