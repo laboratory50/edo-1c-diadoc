@@ -26,7 +26,7 @@ jobs:
             --restart unless-stopped \
             --network default \
             --label "traefik.enable=true" \
-            --label "traefik.http.routers.1cedo.rule=Host(\`1cedo.docker1.lab50\`)" \
+            --label "traefik.http.routers.1cedo.rule=Host(\`edo.lab50.net\`)" \
             --label "traefik.docker.network=traefik_network" \
             1cedo
           docker network connect traefik_network 1cedo
