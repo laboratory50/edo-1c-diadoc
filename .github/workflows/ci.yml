@@ -25,6 +25,9 @@ jobs:
           docker run -d --name 1cedo \
             --restart unless-stopped \
             --network default \
+            -e DJANGO_DEBUG=${{ vars.DJANGO_DEBUG }} \
+            -e DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }} \
+            -e CSRF_TRUSTED_ORIGINS=${{ vars.CSRF_TRUSTED_ORIGINS }} \
             --label "traefik.enable=true" \
             --label "traefik.http.routers.1cedo.rule=Host(\`edo.lab50.net\`)" \
             --label "traefik.docker.network=traefik_network" \

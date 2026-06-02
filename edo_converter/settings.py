@@ -7,6 +7,11 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'not-a-secret-key-for-local-dev
 
 DEBUG = os.environ.get('DJANGO_DEBUG', 'true').lower() in ('true', '1', 'yes')
 
+CSRF_TRUSTED_ORIGINS = os.environ.get(
+    'CSRF_TRUSTED_ORIGINS',
+    'http://127.0.0.1:8000,http://localhost:8000',
+).split(',')
+
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
