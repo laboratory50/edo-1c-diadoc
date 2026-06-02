@@ -7,6 +7,7 @@ on:
 jobs:
   build-and-test:
     runs-on: self-hosted
+    environment: docker.lab50
     env:
       DOCKER_HOST: tcp://docker1.lab50:2375
     steps:
