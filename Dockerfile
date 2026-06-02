@@ -12,6 +12,6 @@ COPY . .
 ENV PYTHONUNBUFFERED=1
 ENV DJANGO_SETTINGS_MODULE=edo_converter.settings
 
-EXPOSE 8000
+EXPOSE 80
 
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:80"]
