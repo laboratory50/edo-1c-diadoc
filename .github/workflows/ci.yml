@@ -24,7 +24,7 @@ jobs:
           docker rm -f 1cedo || true
           docker run -d --name 1cedo \
             --restart unless-stopped \
-            --link default \
+            --network default \
             --label "traefik.enable=true" \
             --label "traefik.http.routers.1cedo.rule=Host(\`1cedo.docker1.lab50\`)" \
             --label "traefik.docker.network=traefik_network" \
