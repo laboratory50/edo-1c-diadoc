@@ -3,9 +3,9 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'not-a-secret-key-for-local-dev-only'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'not-a-secret-key-for-local-dev-only')
 
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', 'true').lower() in ('true', '1', 'yes')
 
 ALLOWED_HOSTS = ['*']
 
