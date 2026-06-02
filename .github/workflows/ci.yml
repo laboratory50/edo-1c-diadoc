@@ -18,3 +18,15 @@ jobs:
 
       - name: Run tests
         run: docker run --rm 1cedo python3 manage.py test
+
+      - name: Deploy
+        run: |
+          docker rm -f 1cedo || true
+          docker run -d --name 1cedo \
+            --restart unless-stopped \
+            --link default \
+            --label "traefik.enable=true" \
+            --label "traefik.http.routers.1cedo.rule=Host(\`1cedo.docker1.lab50\`)" \
+            --label "traefik.docker.network=traefik_network" \
+            1cedo
+          docker network connect traefik_network 1cedo
