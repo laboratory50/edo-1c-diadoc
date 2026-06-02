@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Конвертер ЭДО 1С → Диадок</title>
+    <style>
+        body { font-family: sans-serif; max-width: 500px; margin: 60px auto; padding: 0 20px; }
+        .error { color: #c00; background: #fee; padding: 10px; border-radius: 4px; margin-bottom: 16px; }
+        input[type="file"] { margin-bottom: 16px; }
+    </style>
+</head>
+<body>
+    <h1>Конвертер ЭДО 1С → Диадок</h1>
+    <p>Загрузите ZIP-архив с документом ЭДО из 1С. Сервис удалит служебные поля <code>ИнфПолФХЖ1</code> и <code>ИнфПолФХЖ2</code> и отдаст очищенный XML.</p>
+
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Обработать</button>
+    </form>
+</body>
+</html>
