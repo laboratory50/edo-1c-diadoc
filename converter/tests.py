@@ -61,6 +61,6 @@ class UploadViewTests(SimpleTestCase):
 
         response = self._upload(zip_data)
         disposition = response['Content-Disposition']
-        self.assertIn('filename=', disposition)
-        self.assertIn('ON_', disposition)
+        self.assertIn("filename*=UTF-8''", disposition)
+        self.assertIn('53_26.xml', disposition)
         self.assertIn('.xml', disposition)

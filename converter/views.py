@@ -1,6 +1,7 @@
 import os
 import zipfile
 from io import BytesIO
+from urllib.parse import quote
 
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -33,7 +34,13 @@ def process_zip(file_data):
         xml_declaration=True,
     )
 
-    base_name = os.path.basename(xml_name)
+    naim = root.xpath('.//Документ/@НаимДокОпр')
+    nomer = root.xpath('.//СвСчФакт/@НомерДок')
+    if naim and nomer:
+        base_name = f'{naim[0]}_{nomer[0]}.xml'
+        base_name = base_name.replace(' ', '_').replace('/', '_')
+    else:
+        base_name = os.path.basename(xml_name)
     return cleaned_xml, base_name
 
 
@@ -52,7 +59,7 @@ def upload_view(request):
                 })
 
             response = HttpResponse(cleaned_xml, content_type='application/xml')
-            response['Content-Disposition'] = f'attachment; filename="{filename}"'
+            response['Content-Disposition'] = f"attachment; filename*=UTF-8''{quote(filename)}"
             return response
     else:
         form = UploadFileForm()
